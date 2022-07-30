@@ -18,3 +18,15 @@ private fun test(playerLevel : Int) {
     val message = if( playerLevel in 1..6) "Eithan" else "Issac"
     println(message)
 }
+private fun testWhen(name : String) {
+
+    val nickName = when(name) {
+        "eithan", "issac" -> "sons"
+        "lu", "tan" -> "parents"
+        "mami", "papi", "gato" -> "grant parents"
+        else -> "un-known"
+    }
+
+    println(nickName)
+
+}
