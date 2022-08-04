@@ -6,11 +6,37 @@ data class Vowel(val vowel : Char, val index : Int )
 
 fun main() {
 
-    var text = "aA"
+    var text = "pwwkew"
+
+    println(longestSubstringWithoutRepeatingCharacters(text))
 
 //    println(reverseVowelsOfString(text))
 
-    println(removeVowels("leetcodeisacommunityforcoders"))
+//    println(removeVowels("leetcodeisacommunityforcoders"))
+
+}
+private fun longestSubstringWithoutRepeatingCharacters(resource: String): Int {
+
+    val builder = StringBuilder()
+
+    var longestSize = if(resource.isEmpty()) 0 else 1
+
+    resource.forEach {
+
+        if (builder.contains(it)){
+
+            println(builder)
+            builder.replace(0, builder.indexOf(it)+1 ,"")
+
+        }// end else
+
+        if (!builder.contains(it)) builder.append(it)
+
+        if(builder.length > longestSize) longestSize = builder.length
+
+    }// end foreach
+
+    return longestSize
 
 }
 private fun removeVowels(stringValue: String): String {
