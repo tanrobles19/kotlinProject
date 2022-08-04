@@ -6,11 +6,63 @@ data class Vowel(val vowel : Char, val index : Int )
 
 fun main() {
 
-    var text = "(])"
+    val text = "MMI"
 
-    println(validParentheses(text))
+    println(romanToNumber(text))
 
 }
+private fun romanToNumber(roman: String): Int {
+
+    var number1 = -1
+    var number2 = -1
+    var count = 0
+
+    roman.forEach {
+
+        if(number1 == -1) {
+            number1 = matchRoman(it)
+        } else if(number2 == -1) {
+            number2 = matchRoman(it)
+        }
+
+        if(number1 != -1 && number2 != -1) {
+            if(number1 < number2) {
+                count += (number2 - number1)
+                //initialization
+                number1 = -1
+                number2 = -1
+            }else{
+                count += number1
+                number1 = number2
+                number2 = -1
+            }
+        }// end if
+
+    }// end foreach
+
+    if(number1 != -1) count += number1
+
+    if(number2 != -1) count += number2
+
+    return count
+
+}// end fun romanToNumber()
+
+private fun matchRoman(romanValue: Char): Int{
+
+    val number  = when(romanValue) {
+        'I' -> 1
+        'V' -> 5
+        'X' -> 10
+        'L' -> 50
+        'C' -> 100
+        'D' -> 500
+        else -> 1000
+    }
+
+    return number
+
+}// fun matchRoman()
 
 private fun validParentheses(s: String): Boolean {
 
@@ -20,7 +72,9 @@ private fun validParentheses(s: String): Boolean {
         when(character) {
             '(','{','[' -> stack.add(0, character)
             else -> {
+
                 if(stack.isEmpty()) return false
+
                 if( stack.get(0) == '[' && character == ']' )
                     stack.removeAt(0)
                 else if( stack.get(0) == '{' && character == '}' )
