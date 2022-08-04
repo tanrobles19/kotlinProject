@@ -6,31 +6,47 @@ data class Vowel(val vowel : Char, val index : Int )
 
 fun main() {
 
-    var text = "pwwkew"
+    var text = "(])"
 
-    println(longestSubstringWithoutRepeatingCharacters(text))
-
-//    println(reverseVowelsOfString(text))
-
-//    println(removeVowels("leetcodeisacommunityforcoders"))
+    println(validParentheses(text))
 
 }
-private fun longestSubstringWithoutRepeatingCharacters(resource: String): Int {
+
+private fun validParentheses(s: String): Boolean {
+
+    val stack : ArrayList<Char> = arrayListOf()
+
+    s.forEach { character ->
+        when(character) {
+            '(','{','[' -> stack.add(0, character)
+            else -> {
+                if(stack.isEmpty()) return false
+                if( stack.get(0) == '[' && character == ']' )
+                    stack.removeAt(0)
+                else if( stack.get(0) == '{' && character == '}' )
+                    stack.removeAt(0)
+                else if( stack.get(0) == '(' && character == ')' )
+                    stack.removeAt(0)
+                else
+                    return false
+            }
+        }// end when
+    }// end for
+
+    return stack.isEmpty()
+
+}// end fun validParentheses()
+private fun longestSubstringWithoutRepeatingCharacters(s: String): Int {
 
     val builder = StringBuilder()
 
-    var longestSize = if(resource.isEmpty()) 0 else 1
+    var longestSize = if(s.isEmpty()) 0 else 1
 
-    resource.forEach {
+    s.forEach {
 
-        if (builder.contains(it)){
+        if (builder.contains(it)) builder.replace(0, builder.indexOf(it) + 1 ,"")
 
-            println(builder)
-            builder.replace(0, builder.indexOf(it)+1 ,"")
-
-        }// end else
-
-        if (!builder.contains(it)) builder.append(it)
+        builder.append(it)
 
         if(builder.length > longestSize) longestSize = builder.length
 
