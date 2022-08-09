@@ -6,11 +6,60 @@ data class Vowel(val vowel : Char, val index : Int )
 
 fun main() {
 
-    val text = "MMI"
+    val array = Array(20000001) {it}
 
-    println(romanToNumber(text))
+    var i = binarySearch(array, 19999999)
 
+    println(i)
 }
+private fun binarySearch(array : Array<Int>, item : Int): Int {
+
+    var low = 0
+    var high = array.size - 1
+
+    var index = 0
+
+    while (low <= high){
+
+        val mid = (low + high) / 2
+        val guess = array[mid]
+
+        index++
+
+        if( item == guess) {
+            println(index)
+            return mid
+        }
+
+        if(guess > item) {
+            high = mid - 1
+        }else{
+            low = mid + 1
+        }
+
+    }// end while
+
+    return index
+
+}// end fun binarySearch()
+private fun lineaSearch(array : Array<Int>) {
+
+    val item = 19999000
+
+    println("Iterating...")
+
+    array.forEach {
+        println(it)
+        if(it == item)
+            println(
+                "******************** FOUND IT ********************"
+            )
+    }
+
+    println("wrap up...")
+
+}// end fun lineaSearch()
+
 private fun romanToNumber(roman: String): Int {
 
     var number1 = -1
