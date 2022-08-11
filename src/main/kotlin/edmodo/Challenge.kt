@@ -1,13 +1,15 @@
 fun main() {
 
-    val number = 2
-    val list :ArrayList<Int> = arrayListOf()
+    val number = 1700896918
 
-    println(happyNumber(number, list))
+    val hashTable : HashMap<Int, Int> = hashMapOf()
+//    val list :ArrayList<Int> = arrayListOf()
+
+    println(happyNumber(number, hashTable))
 
 }
 
-private fun happyNumber(number: Int, list: ArrayList<Int>): Boolean {
+private fun happyNumber(number: Int, hashTable: HashMap<Int, Int>): Boolean {
 
     var sum = 0
 
@@ -15,16 +17,21 @@ private fun happyNumber(number: Int, list: ArrayList<Int>): Boolean {
         sum += it * it
     }
 
-    if(list.contains(sum)) {
+
+    /* contains function is based on indexOf, Big O(n)
+     * indexOf is a linear search implementation
+     */
+    if(hashTable.contains(sum)) {
+        println("Hash Table power")
         return false
     }
 
-    list.add(sum)
+    hashTable[sum] = sum
 
     if (sum == 1) {
         return true
     }else{
-        return happyNumber(sum, list)
+        return happyNumber(sum, hashTable)
     }
 
 }// end fun happyNumber()
