@@ -42,6 +42,57 @@ class AdjacencyList<T: Any> : Graph<T> {
 
             }
         }
-    }
+    }// end fun toString
+
+    fun sumDistanceBetweenVertices(source: Vertex<T>, destination: Vertex<T>): Int {
+
+        var sum = 0
+
+        edges(source).forEach {
+            if(it.destination == destination)
+                return sum + 1
+            else
+                sum += sumDistanceBetweenVertices(it.destination, destination)
+        }
+
+        return sum
+
+    }// end fun sumDistanceBetweenVertices()
+
+    fun findMutualVertices(vertex1: Vertex<T>, vertex2: Vertex<T>) {
+
+        // naive solution
+//        var finalList : ArrayList<Edge<T>> = arrayListOf()
+
+        val finalList : HashMap<String, Vertex<T>> = hashMapOf()
+        var index = 0
+
+        edges(vertex1).forEach {
+            finalList[it.destination.data.toString()] = it.destination
+            index++
+        }
+
+        edges(vertex2).forEach { edge2 ->
+            index++
+            //Big O(1)
+            finalList.containsKey(edge2.destination.data.toString()).let {
+                println(edge2)
+            }
+
+        }
+
+
+
+// naive solution
+//        edges(vertex1).forEach {edge1 ->
+//            edges(vertex2).forEach {edge2 ->
+//                index++
+//                if(edge1.destination == edge2.destination) finalList.add(edge1)
+//            }
+//        }
+        println(index)
+//        println(finalList)
+
+    }// end fun findMutualVertices()
 
 }

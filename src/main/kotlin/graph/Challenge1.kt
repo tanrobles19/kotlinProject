@@ -31,25 +31,12 @@ fun main() {
 //        println(it)
 //    }
 
-    println(sumDistanceBetweenVertices(graph, A, E))
+    // Find the distance between 2 vertices.
+//    println(graph.sumDistanceBetweenVertices(D, A))
+
+    // Which mutual Vertices have A and B vertices?
+
+    //Under the hood we have an adjacency list, it is a hash table with a vertex as a key and list as ArrayList of edges.
+    graph.findMutualVertices(A, B)
 
 }
-
-//naive algorithm
-fun sumDistanceBetweenVertices(graph: AdjacencyList<String>, source: Vertex<String>, destination: Vertex<String>): Int {
-
-    var sum = 0
-
-    graph.edges(source).forEach {
-//        println("${it.source.data} to ${it.destination.data}")
-        if(it.destination == destination){
-            println(1)
-            return sum + 1
-        }else{
-            sum += sumDistanceBetweenVertices(graph, it.destination, destination)
-        }
-    }
-
-    return sum
-
-}// end fun sumDistanceBetweenVertices()

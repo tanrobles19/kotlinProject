@@ -6,12 +6,22 @@ data class Vowel(val vowel : Char, val index : Int )
 
 fun main() {
 
-    val array = Array(20000001) {it}
+    val array = Array(60){2}
 
-    var i = binarySearch(array, 19999999)
+    println(sumArray(array, 0))
 
-    println(i)
 }
+
+fun sumArray(array: Array<Int>, index: Int): Int {
+
+    if(array.size > index) {
+        return array[index] + array[index + 1] + sumArray(array, index + 2)
+    }
+
+    return 0
+
+}
+
 private fun binarySearch(array : Array<Int>, item : Int): Int {
 
     var low = 0
