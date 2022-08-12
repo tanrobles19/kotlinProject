@@ -7,6 +7,20 @@ private const val FLIGHT_ENDPOINT = "$BASE_URL/flight"
 
 fun main() {
 
+    parallelNetworkRequest()
+
+//    sequentialNetworkRequest()
+
+}
+
+// async and await
+fun parallelNetworkRequest() {
+
+    runBlocking {
+        println("parallel start")
+
+        println("parallel: " + fetchFlight(FLIGHT_ENDPOINT))
+    }
 
 }
 
@@ -48,9 +62,29 @@ fun unManagedThread() {
     }
 }
 
-suspend fun fetchFlight(url: String): String {
-    return withContext(Dispatchers.IO) {
-        URL(url).readText()
+suspend fun fetchFlight(url: String): String = coroutineScope {
+
+    val flightResponse = async {
+        println("call flight")
+        withContext(Dispatchers.IO) {
+            URL(url).readText()
+        }
     }
+
+    val loyaltyResponse = async {
+        println("call loyalty")
+        withContext(Dispatchers.IO) {
+            URL("http://kotlin-book.bignerdranch.com/2e/loyalty").readText()
+        }
+    }
+
+    println("await flight")
+    val flightResponseText = flightResponse.await()
+    println("await loyalty")
+    val loyaltyResponseText = loyaltyResponse.await()
+
+    println("RESPONSE READY")
+    flightResponseText + loyaltyResponseText
+
 }
 
