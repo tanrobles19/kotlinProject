@@ -1,8 +1,15 @@
+import kotlin.random.Random
+
 fun main() {
 
     val nums: IntArray = intArrayOf(1,2,3,1,1,3)
 
-    println(test(nums))
+
+    println(nums.size)
+
+    (1..30).forEach {
+        println(nums.elementAt(Random.nextInt(nums.size)))
+    }
 
 }
 
@@ -16,7 +23,10 @@ fun test(nums: IntArray): Int {
             var item = it
             item+=1
             hashMap.put(number, item)
-        }?: hashMap.put(number, 1)
+        }?: {
+            hashMap.put(number, 1)
+
+        }
 
     }
 
@@ -30,6 +40,8 @@ fun test(nums: IntArray): Int {
             count+=1
         }
     }
+
+    hashMap.values.random()
 
     return count
 }// end fun test()
