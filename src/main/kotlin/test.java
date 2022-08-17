@@ -1,18 +1,9 @@
 public class test {
 
     public static void main(String args[]) {
-        TreeNode root = new TreeNode(7);
-        root.left = new TreeNode(4);
 
-        TreeNode tres = new TreeNode(3);
 
-        root.right = tres;
 
-        tres.left = new TreeNode(6);
-        tres.right = new TreeNode(19);
-
-        System.out.println(findNode(root, tres).val);
-//        println( findNode(root, tres)?.`val` );
     }
     public static TreeNode findNode(TreeNode cloned, TreeNode target){
 
