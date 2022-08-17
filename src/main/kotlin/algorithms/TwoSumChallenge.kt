@@ -25,7 +25,7 @@ fun sumTwo(nums: IntArray, target: Int): IntArray {
 //Big O(n2) Worst solution(two for loop)
 fun sumTwo2(nums: IntArray, target: Int): IntArray {
 
-    val index : IntArray = IntArray(2)
+    val index : IntArray     = IntArray(2)
 
     for (i in nums.indices) {
 
